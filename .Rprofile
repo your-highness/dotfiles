@@ -33,7 +33,7 @@ if(interactive()){
 
     #Automatically set the value of options("width") when the terminal
     #DO NOT use with graphical R interfaces (Rstudo etc.)
-    options(setwidth.verbose = 3)
+    options(setwidth.verbose = 1)
     library(setwidth)
 
     # provides a TCP/IP server to allow the communication between R and Vim-R-plugin
