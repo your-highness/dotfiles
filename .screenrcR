@@ -7,17 +7,13 @@ source ~/.screenrc
 
 #create all screens (keep window running upon terminate by using "stuff")
 screen -t HTOP 0
-stuff "ssh-mpi"
-stuff "ssh enemenemuh"
 stuff "htop"
 screen -t VIM 1 vim
 stuff ":let g:slime_default_config = {\"sessionname\": \"$STY\", \"windowname\": \"2\"}"
 stuff ":let g:slime_config = {\"sessionname\": \"$STY\", \"windowname\": \"2\"}"
 stuff ":let g:slime_dont_ask_default = 1"
 screen -t RSHELL 2
-stuff "ssh-mpi"
-stuff "ssh enemenemuh"
-stuff "nice R"
+stuff "/home/joei/R-devel/bin/R"
 screen -t bash 3
 screen -t misc 4
 
@@ -33,3 +29,6 @@ select 0
 
 #starting in VIM window
 focus left
+
+#keep window arrangement for re-attachment
+layout save default
