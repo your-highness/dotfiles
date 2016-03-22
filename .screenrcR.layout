@@ -1,0 +1,16 @@
+#organize layout
+layout new rIDE
+select 1
+split -v
+resize 90
+focus right
+select 2
+split
+focus down
+select 0
+
+#starting in VIM window
+focus left
+
+#keep window arrangement for re-attachment
+layout save rIDE

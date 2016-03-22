@@ -23,18 +23,5 @@ screen -t "enemenemuh sh" 3
 stuff "cd $1"
 screen -t misc 4
 
-#organize layout
-select 1
-split -v
-resize 90
-focus right
-select 2
-split
-focus down
-select 0
-
-#starting in VIM window
-focus left
-
-#keep window arrangement for re-attachment
-layout save default
+#load layout
+source ~/.screenrcR.layout

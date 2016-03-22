@@ -36,4 +36,8 @@ hardstatus string "%{= kb}[ %=%{w}%?%-Lw%?%{C}(%{W}%n*%f %t%?(%u)%?%{C})%{w}%?%+
 # Turn off the fucking visual bell
 vbell off
 
+#save default layout
+layout new one
+bind q layout next 
+
 # End of file
