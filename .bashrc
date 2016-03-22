@@ -146,7 +146,7 @@ EDITOR='vim'
 PYTHONSTARTUP=~/.pythonrc
 
 #map ESC to CAPS LOCK
-#setxkbmap -option caps:escape
+setxkbmap -option caps:escape
 
 #VIM is default editor
 export VISUAL=VIM

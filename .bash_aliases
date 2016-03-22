@@ -35,6 +35,7 @@ alias apt-upgrade="sudo apt-get update && sudo apt-get update && sudo apt-get up
 
 alias R-dev="~/R-devel/bin/R"
 alias rIDE="screen -c ~/.screenrcR"
+alias rIDEr="screen -c ~/.screenrcRremote"
 
 #This was set by sudo apt-get install android-tools-adb android-tools-fastboot. I have to comment it and the programs work
 #alias adb="/opt/android-sdk/platform-tools/adb"
