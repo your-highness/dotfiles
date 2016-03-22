@@ -132,6 +132,8 @@ LS_COLORS="ow=01;34:di=01;34:ln=01;36:ex=01;32"
 # shorten prompt
 export PROMPT_COMMAND='DIR=`pwd|sed -e "s!$HOME!~!"`; if [ ${#DIR} -gt 50 ]; then CurDir=${DIR:0:20}...${DIR:${#DIR}-20}; else CurDir=$DIR; fi'
 PS1="\h:\$CurDir>"
+#window title
+#export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 
 # ssh
 SSH_COMPLETE=$(cut -f1 -d' ' ~/.ssh/known_hosts |\
