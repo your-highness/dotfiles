@@ -6,22 +6,25 @@
 source ~/.screenrc
 
 #create all screens (keep window running upon terminate by using "stuff")
-screen -t "enemenemuh htop" 0
+screen -t "$STY enemenemuh htop" 0
 stuff "ssh-mpi"
 stuff "ssh enemenemuh"
 stuff "htop"
-screen -t VIM 1 vim
+screen -t "$STY VIM" 1
+stuff "vim"
 stuff ":let g:slime_default_config = {\"sessionname\": \"$STY\", \"windowname\": \"2\"}"
 stuff ":let g:slime_config = {\"sessionname\": \"$STY\", \"windowname\": \"2\"}"
 stuff ":let g:slime_dont_ask_default = 1"
-screen -t "enemenemuh R" 2
+screen -t "$STY enemenemuh R" 2
 stuff "ssh-mpi"
 stuff "ssh enemenemuh"
 stuff "cd ~/workspace/$WSPATH"
 stuff "nice R"
-screen -t "enemenemuh sh" 3
-stuff "cd $1"
-screen -t misc 4
+screen -t "$STY enemenemuh bash" 3
+stuff "ssh-mpi"
+stuff "ssh enemenemuh"
+stuff "cd ~/workspace/$WSPATH"
+screen 4
 
 #load layout
 source ~/.screenrcR.layout

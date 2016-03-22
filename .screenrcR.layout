@@ -1,16 +1,27 @@
-#organize layout
-layout new rIDE
+#top pane is large for vim with 2 small panes at the bottom
+layout new rIDE-horizontal
+select 1
+only
+split
+resize 60
+focus down
+select 2
+split -v
+resize 70%
+focus right
+select 0
+focus up
+layout save rIDE-horizontal
+
+#vertical
+layout new rIDE-vertical
 select 1
 split -v
-resize 90
 focus right
 select 2
+resize 120
 split
 focus down
 select 0
-
-#starting in VIM window
 focus left
-
-#keep window arrangement for re-attachment
-layout save rIDE
+layout save rIDE-vertical

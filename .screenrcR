@@ -6,16 +6,17 @@
 source ~/.screenrc
 
 #create all screens (keep window running upon terminate by using "stuff")
-screen -t HTOP 0
+screen -t "$STY HTOP" 0
 stuff "htop"
-screen -t VIM 1 vim
+screen -t "$STY VIM" 1
+stuff "vim"
 stuff ":let g:slime_default_config = {\"sessionname\": \"$STY\", \"windowname\": \"2\"}"
 stuff ":let g:slime_config = {\"sessionname\": \"$STY\", \"windowname\": \"2\"}"
 stuff ":let g:slime_dont_ask_default = 1"
-screen -t RSHELL 2
+screen -t "$STY RSHELL" 2
 stuff "/home/joei/R-devel/bin/R"
-screen -t bash 3
-screen -t misc 4
+screen 3
+screen 4
 
 #load layout
 source ~/.screenrcR.layout
