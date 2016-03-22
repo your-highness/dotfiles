@@ -15,6 +15,7 @@ defscrollback 1000                   # default: 100
 
 # Ensure the default shell is the same as the $SHELL environment variable
 shell -$SHELL
+shelltitle "$STY bash"
 
 # Make navigating between regions easier
 bind s split
@@ -30,10 +31,13 @@ bind + resize +1
 bind - resize -1
 
 # Configure status bar at the bottom of the terminal
-shelltitle "$STY bash"
-termcapinfo xterm* 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
-#hardstatus string "%{= kb}[$STY %=%{w}%?%-Lw%?%{C}(%{W}%n*%f %t%?(%u)%?%{C})%{w}%?%+Lw%?%?%= %{b}][%{C} %Y.%m.%d %{W}%0c %{b}]"
-#hardstatus alwayslastline
+#termcapinfo xterm* 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
+#hardstatus alwayslastline "%{= kb}[$STY %=%{w}%?%-Lw%?%{C}(%{W}%n*%f %t%?(%u)%?%{C})%{w}%?%+Lw%?%?%= %{b}][%{C} %Y.%m.%d %{W}%0c %{b}]"
+
+termcapinfo xterm*|Eterm|mlterm "hs:ts=\E]0;:fs=\007:ds=\E]0;screen\007"
+hardstatus off
+hardstatus string "[$STY] %n$%t %? [%h]%?"
+caption always "%?%F%{-b bc}%:%{-b bb}%?%C|%D|%M %d|%H%?%F%{+u wb}%? %L=%-Lw%45>%{+b by}%n%f*%t%{-}%+Lw%-0<"
 
 # Turn off the fucking visual bell
 vbell off
