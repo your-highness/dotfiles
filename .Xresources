@@ -1,0 +1,24 @@
+xterm*charClass:	34:48,39:48,45-47:48,64:48,96:48,126:48
+xterm*geometry:         122x36
+xterm*font:             terminus-12
+xterm*boldFont:         terminus-bold-12
+xterm*background:       black
+xterm*foreground:       grey
+xterm*pointerColor:     grey
+xterm*pointShape:       arrow
+xterm*pointerColorBackground: green
+xterm*internalBorder:   2
+xterm*loginShell:       true
+xterm*scrollBar:        false
+xterm*scrollKey:        false
+xterm*saveLines:        10000
+xterm*multiClickTime:   250 
+xterm*eightBitOutput:   true
+
+! 2014-06-06 Do not mess around with this remapping of keybindings
+*VT100.Translations: #override \
+              <Key>BackSpace: string(0x7F)\n\
+              <Key>Delete:    string("\033[3~")\n\
+              <Key>Home:      string("\033[1~")\n\
+              <Key>End:       string("\033[4~")
+*ttyModes: erase ^? 

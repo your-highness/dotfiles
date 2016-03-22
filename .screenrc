@@ -1,0 +1,39 @@
+# +AMDG
+startup_message off
+#hardstatus alwayslastline
+#termcapinfo xterm|xterms|xs|rxvt ti@:te@
+#caption string "%{= kB}%-Lw%{=s kB}%50>%n%f* %t %{-}%+Lw%<"
+# avoid screen conflicting with vi bindings; basically,
+# whenever it sees "escape", screen waits for more
+# characters, and only passes the escape to the program
+# after a short pause; this sets the pause to zero
+maptimeout 0
+defc1 off
+
+# Change the number of scrollback lines
+defscrollback 1000                   # default: 100
+
+# Ensure the default shell is the same as the $SHELL environment variable
+shell -$SHELL
+
+# Make navigating between regions easier
+bind s split
+bind V split -v
+bind h focus left
+bind j focus down
+bind k focus up
+bind l focus right
+
+# Make resizing regions easier
+bind = resize =
+bind + resize +1
+bind - resize -1
+
+# Configure status bar at the bottom of the terminal
+hardstatus alwayslastline
+hardstatus string "%{= kb}[ %=%{w}%?%-Lw%?%{C}(%{W}%n*%f %t%?(%u)%?%{C})%{w}%?%+Lw%?%?%= %{b}][%{C} %Y.%m.%d %{W}%0c %{b}]"
+
+# Turn off the fucking visual bell
+vbell off
+
+# End of file
