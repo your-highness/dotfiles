@@ -1,0 +1,40 @@
+#
+# Initiate a screen session with my
+# preferred dev environment
+#
+
+source ~/.screenrc
+
+#create all screens (keep window running upon terminate by using "stuff")
+screen -t "enemenemuh htop" 0
+stuff "ssh-mpi"
+stuff "ssh enemenemuh"
+stuff "htop"
+screen -t VIM 1 vim
+stuff ":let g:slime_default_config = {\"sessionname\": \"$STY\", \"windowname\": \"2\"}"
+stuff ":let g:slime_config = {\"sessionname\": \"$STY\", \"windowname\": \"2\"}"
+stuff ":let g:slime_dont_ask_default = 1"
+screen -t "enemenemuh R" 2
+stuff "ssh-mpi"
+stuff "ssh enemenemuh"
+stuff "cd ~/workspace/$WSPATH"
+stuff "nice R"
+screen -t "enemenemuh sh" 3
+stuff "cd $1"
+screen -t misc 4
+
+#organize layout
+select 1
+split -v
+resize 90
+focus right
+select 2
+split
+focus down
+select 0
+
+#starting in VIM window
+focus left
+
+#keep window arrangement for re-attachment
+layout save default
