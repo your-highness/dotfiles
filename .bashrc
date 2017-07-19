@@ -1,4 +1,12 @@
-# ~/.bashrc: executed by bash(1) for non-login shells
+case "$0" in
+          -sh|sh|*/sh)	modules_shell=sh ;;
+       -ksh|ksh|*/ksh)	modules_shell=ksh ;;
+       -zsh|zsh|*/zsh)	modules_shell=zsh ;;
+    -bash|bash|*/bash)	modules_shell=bash ;;
+esac
+module() { eval `/usr/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
+#module() { eval `/usr/bin/modulecmd $modules_shell $*`; }
+# ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
@@ -37,7 +45,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+    xterm-color|*-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -84,6 +92,15 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+alias ll='ls -alFh'
+alias la='ls -Ah'
+alias l='ls -CFh'
+alias lq='ls -ltrh'
+
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -111,14 +128,12 @@ fi
 #migrated from old archlinux home
 PAGER='less'
 LESS='-MiRXS'
-PS1="\h:\w>"
-PATH=$PATH:/home/joei/bin
+PATH=$PATH:/home/helmuth/bin
 
-export LESS PS1 PAGER PATH
+export LESS PAGER PATH
 
 umask 066
 
-#shopt -s autocd
 
 # history
 HISTCONTROL=erasedups:ignorespace
@@ -129,11 +144,6 @@ bind '"\e[B"':history-search-forward
 # ls
 LS_COLORS="ow=01;34:di=01;34:ln=01;36:ex=01;32"
 
-# shorten prompt
-export PROMPT_COMMAND='DIR=`pwd|sed -e "s!$HOME!~!"`; if [ ${#DIR} -gt 50 ]; then CurDir=${DIR:0:20}...${DIR:${#DIR}-20}; else CurDir=$DIR; fi'
-PS1="\h:\$CurDir>"
-#window title
-#export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 
 # ssh
 SSH_COMPLETE=$(cut -f1 -d' ' ~/.ssh/known_hosts |\
@@ -168,22 +178,16 @@ function ..
   done
 }
 
-function update_display() 
-{
-  screen ${@} -X stuff "export DISPLAY=${DISPLAY}$(echo -ne '\015')"
-}
-
-function update_all_windows() 
-{
-  # window 0 is VIM, window 4 is htop
-  screen ${@} -p 3 -X stuff "Sys.setenv('DISPLAY'='${DISPLAY}')$(echo -ne '\015')"
-  for j in 4 5 6 7; do
-    update_display -p $j ${@}
-  done
-}
 #Remove dependencies build by apt-get build-deps $1
 function remove-build-deps {
   sudo aptitude markauto $(apt-cache showsrc $1 | sed -e '/Build-Depends/!d;s/Build-Depends: \|,\|([^)]*),*\|\[[^]]*\]//g')
   sudo apt-get autoremove
 }
 
+
+
+PATH="/home/helmuth/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/helmuth/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/helmuth/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/helmuth/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/helmuth/perl5"; export PERL_MM_OPT;
