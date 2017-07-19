@@ -33,7 +33,6 @@ hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 nmap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
 "Set color scheme
 set t_Co=256
-colorscheme wombat256mod
 syntax enable
 "Splitting (vsp -> right, sp -> below)
 set splitright
@@ -171,3 +170,4 @@ let g:ctrlp_switch_buffer = 0
 nmap \e :NERDTreeToggle<CR>
 "Airline
 set laststatus=2
+colorscheme wombat
