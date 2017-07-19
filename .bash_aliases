@@ -19,11 +19,9 @@ alias vgrep='grep -v'
 
 alias xterm="xterm -e screen"
 
-alias ssh-joenix="ssh -Y joenix.local"
 alias ssh-mpi="ssh -Y helmuth@geniux.molgen.mpg.de"
 
 alias eclipse="eclipse -vmargs -Xmx512M"
-alias calc="gnome-calculator"
 alias gterm="gnome-terminal"
 alias ooffice="/opt/openoffice.org3/program/soffice"
 alias remv-backups="find . -name \"*~\" | xargs rm -f"
