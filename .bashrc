@@ -112,7 +112,7 @@ fi
 PAGER='less'
 LESS='-MiRXS'
 PS1="\h:\w>"
-PATH=$PATH:/home/joei/bin
+PATH=$PATH:/home/helmuth/bin
 
 export LESS PS1 PAGER PATH
 
