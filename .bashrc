@@ -142,8 +142,8 @@ SSH_COMPLETE=$(cut -f1 -d' ' ~/.ssh/known_hosts |\
                  grep -e '[[:alpha:]]')
 complete -o default -W "${SSH_COMPLETE[*]}" ssh
 
-SVN_EDITOR='vim'
-EDITOR='vim'
+export SVN_EDITOR='vim'
+export EDITOR='vim'
 
 PYTHONSTARTUP=~/.pythonrc
 
@@ -152,7 +152,6 @@ setxkbmap -option caps:escape
 
 #VIM is default editor
 export VISUAL=VIM
-export EDITOR="$VISUAL"
 
 ####
 # Functions
