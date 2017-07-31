@@ -4,7 +4,7 @@
 
 alias lp='/bin/ls' # for piping
 alias ls='ls --color' #-F'
-alias ll='ls -alF'
+alias ll='ls -alFh'
 alias la='ls -ah'
 alias lq='ls -ltrh'
 alias lS='ls -lSrh'
