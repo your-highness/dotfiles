@@ -7,7 +7,7 @@
 """
 set nocompatible
 set bs=2 "set backspace to be able to delete previous characters
-set backupdir=/tmp
+"set backupdir=/tmp
 set directory=/tmp
 
 """
@@ -34,6 +34,7 @@ nmap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
 "Set color scheme
 set t_Co=256
 syntax enable
+colorscheme elflord
 "Splitting (vsp -> right, sp -> below)
 set splitright
 set splitbelow
@@ -142,11 +143,11 @@ nmap \m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 """
 "Plugins
 """
+"Pathogen
+execute pathogen#infect()
 "Slime send text through screen
 let g:slime_target = "screen"
 let g:slime_paste_file = tempname()
-"Pathogen
-execute pathogen#infect()
 "Syntastic (recommend from https://github.com/scrooloose/syntastic)
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -157,6 +158,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 "R spell checker (needs lint package -> install.packages("lint") )
 let g:syntastic_r_lint_styles = 'list(spacing.indentation.notabs, spacing.indentation.evenindent)'
+let g:syntastic_java_checkers = []
 "CtrlP Fuzzy Filesearch
 nmap ] :CtrlPBuffer<CR>
 let g:ctrlp_map = '<Leader>t'
@@ -170,7 +172,6 @@ let g:ctrlp_switch_buffer = 0
 nmap \e :NERDTreeToggle<CR>
 "Airline
 set laststatus=2
-colorscheme wombat
 
 "snakemake
 au BufNewFile,BufRead Snakefile set syntax=snakemake
