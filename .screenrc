@@ -17,6 +17,9 @@ defscrollback 1000                   # default: 100
 shell -$SHELL
 shelltitle "$STY bash"
 
+####
+# KEYBINDINGS
+####
 # Make navigating between regions easier
 bind s split
 bind V split -v
@@ -24,6 +27,7 @@ bind h focus left
 bind j focus down
 bind k focus up
 bind l focus right
+bind z layout next
 
 # Make resizing regions easier
 bind = resize =
@@ -31,9 +35,6 @@ bind + resize +1
 bind - resize -1
 
 # Configure status bar at the bottom of the terminal
-#termcapinfo xterm* 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
-#hardstatus alwayslastline "%{= kb}[$STY %=%{w}%?%-Lw%?%{C}(%{W}%n*%f %t%?(%u)%?%{C})%{w}%?%+Lw%?%?%= %{b}][%{C} %Y.%m.%d %{W}%0c %{b}]"
-
 termcapinfo xterm*|Eterm|mlterm "hs:ts=\E]0;:fs=\007:ds=\E]0;screen\007"
 hardstatus off
 hardstatus string "[$STY] %n$%t %? [%h]%?"
@@ -41,11 +42,45 @@ caption always "%?%F%{-b bc}%:%{-b bb}%?%C|%D|%M %d|%H%?%F%{+u wb}%? %L=%-Lw%45>
 
 # Turn off the fucking visual bell
 vbell off
-
 altscreen on
 
-#save default layout
-layout new one
-bind z layout next
+####
+# Generate some tabs
+####
+screen -t "$STY VIM" 0
+stuff "vim"
+#stuff ":let g:slime_default_config = {\"sessionname\": \"$STY\", \"windowname\": \"3\"}"
+#stuff ":let g:slime_config = {\"sessionname\": \"$STY\", \"windowname\": \"3\"}"
+#stuff ":let g:slime_dont_ask_default = 1"
+screen -t "$STY HTOP" 1
+stuff "htop -u helmuth"
+screen -t "bash1" 3
+screen -t "bash2" 4
+screen -t "bash3" 5
+
+####
+# LAYOUTS
+####
+bind g eval 'source /opt/resources/user_screen_layout'
+#Maximized VIM
+layout Maximized
+select 0
+layout save Maximized
+layout new default
+select 0
+split -v
+resize -v 85
+focus right
+select 3
+split
+focus down
+select 1
+resize 25
+split
+focus down
+select 2
+resize 25
+focus left
+layout save default
 
 # End of file
