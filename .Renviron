@@ -1,2 +1,4 @@
 R_LIBS=/home/helmuth/R/x86_64-unknown-linux-gnu-library/%v
 PAGER=/usr/bin/less
+#http_proxy=http://proxy.charite.de:8080/
+#https_proxy=http://proxy.charite.de:8080/$
