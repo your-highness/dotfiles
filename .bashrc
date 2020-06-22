@@ -95,12 +95,6 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-alias ll='ls -alFh'
-alias la='ls -Ah'
-alias l='ls -CFh'
-alias lq='ls -ltrh'
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 #alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -132,7 +126,7 @@ PATH=$PATH:/home/helmuth/bin
 
 export LESS PAGER PATH
 
-umask 066
+umask 002
 
 
 # history
@@ -144,6 +138,9 @@ bind '"\e[B"':history-search-forward
 # ls
 LS_COLORS="ow=01;34:di=01;34:ln=01;36:ex=01;32"
 
+# shorten prompt
+export PROMPT_COMMAND='DIR=`pwd|sed -e "s!$HOME!~!"`; if [ ${#DIR} -gt 50 ]; then CurDir=${DIR:0:20}...${DIR:${#DIR}-20}; else CurDir=$DIR; fi'
+PS1="\h:\$CurDir>"
 
 # ssh
 SSH_COMPLETE=$(cut -f1 -d' ' ~/.ssh/known_hosts |\
@@ -192,4 +189,29 @@ PERL_MB_OPT="--install_base \"/home/helmuth/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/helmuth/perl5"; export PERL_MM_OPT;
 
 # added by Miniconda2 4.3.21 installer
-export PATH="/opt/conda/miniconda3/bin:$PATH"
+# export PATH="/opt/conda/miniconda3/bin:$PATH"  # commented out by conda initialize  # commented out by conda initialize
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/conda/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/conda/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/conda/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/conda/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+export -f conda
+export -f __conda_activate
+export -f __conda_reactivate
+export -f __conda_hashr
+export -f __add_sys_prefix_to_path
+
+export HISTTIMEFORMAT='%F %a %T %t'
+export JAVA_TOOL_OPTIONS+=" -Djava.net.useSystemProxies=true"
