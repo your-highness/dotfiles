@@ -143,35 +143,35 @@ nmap \m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 """
 "Plugins
 """
-"Pathogen
-execute pathogen#infect()
-"Slime send text through screen
-let g:slime_target = "screen"
-let g:slime_paste_file = tempname()
-"Syntastic (recommend from https://github.com/scrooloose/syntastic)
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-"R spell checker (needs lint package -> install.packages("lint") )
-let g:syntastic_r_lint_styles = 'list(spacing.indentation.notabs, spacing.indentation.evenindent)'
-let g:syntastic_java_checkers = []
-"CtrlP Fuzzy Filesearch
-nmap ] :CtrlPBuffer<CR>
-let g:ctrlp_map = '<Leader>t'
-let g:ctrlp_match_window_bottom = 0
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_dotfiles = 0
-let g:ctrlp_switch_buffer = 0
-"NERDtree
-nmap \e :NERDTreeToggle<CR>
-"Airline
-set laststatus=2
+""Pathogen
+"execute pathogen#infect()
+""Slime send text through screen
+"let g:slime_target = "screen"
+"let g:slime_paste_file = tempname()
+""Syntastic (recommend from https://github.com/scrooloose/syntastic)
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+""R spell checker (needs lint package -> install.packages("lint") )
+"let g:syntastic_r_lint_styles = 'list(spacing.indentation.notabs, spacing.indentation.evenindent)'
+"let g:syntastic_java_checkers = []
+""CtrlP Fuzzy Filesearch
+"nmap ] :CtrlPBuffer<CR>
+"let g:ctrlp_map = '<Leader>t'
+"let g:ctrlp_match_window_bottom = 0
+"let g:ctrlp_match_window_reversed = 0
+"let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
+"let g:ctrlp_working_path_mode = 0
+"let g:ctrlp_dotfiles = 0
+"let g:ctrlp_switch_buffer = 0
+""NERDtree
+"nmap \e :NERDTreeToggle<CR>
+""Airline
+"set laststatus=2
 
 "snakemake
 au BufNewFile,BufRead Snakefile set syntax=snakemake
