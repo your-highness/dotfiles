@@ -20,12 +20,12 @@ if(interactive()){
     options(continue=" ")
 
     # neat colored output for xterm
+    library(colorout)
     options(colorout.verbose = 1)
     options(colorout.anyterm = TRUE)
     options(colorout.dumb = TRUE)
     options(colorout.noninteractive = TRUE)
     options(colorout.notatty = TRUE)    
-    library(colorout)
     setOutputColors256(verbose=F)    
 }
 
