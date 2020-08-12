@@ -1,21 +1,29 @@
+####
+# GNU Screen Configuration for s-labb-ngs02
+####
 # +AMDG
+#Turn off splash screen
 startup_message off
-#hardstatus alwayslastline
-#termcapinfo xterm|xterms|xs|rxvt ti@:te@
-#caption string "%{= kB}%-Lw%{=s kB}%50>%n%f* %t %{-}%+Lw%<"
 # avoid screen conflicting with vi bindings; basically,
 # whenever it sees "escape", screen waits for more
 # characters, and only passes the escape to the program
 # after a short pause; this sets the pause to zero
 maptimeout 0
 defc1 off
-
 # Change the number of scrollback lines
-defscrollback 1000                   # default: 100
-
+vbell on
+altscreen on
+#Increase scrollback from 100 to 15000
+defscrollback 15000
 # Ensure the default shell is the same as the $SHELL environment variable
 shell -$SHELL
 shelltitle "$STY bash"
+# Configure status bar at the bottom of the terminal
+termcapinfo xterm*|Eterm|mlterm "hs:ts=\E]0;:fs=\007:ds=\E]0;screen\007"
+hardstatus off
+hardstatus string "$USER@%H - [$STY] %n$%t %? [%h]%?"
+caption always "%{u}%{=bu}%{r}$USER@%H%{-} %{y}[%n]%{-} %{w}[%l]%{-} %{g}%c:%s %d.%m.%Y%{-} %{c}| %?%-Lw%?%{Y}%n*%f %t%?(%u)%?%{c}%?%+Lw%?"
+#caption always "%?%F%{-b bc}%:%{-b bb}%?%C|%D|%M %d|%H%?%F%{+u wb}%? %L=%-Lw%45>%{+b by}%n%f*%t%{-}%+Lw%-0<"
 
 ####
 # KEYBINDINGS
@@ -28,45 +36,29 @@ bind j focus down
 bind k focus up
 bind l focus right
 bind z layout next
-
 # Make resizing regions easier
 bind = resize =
 bind + resize +1
 bind - resize -1
 
-# Configure status bar at the bottom of the terminal
-termcapinfo xterm*|Eterm|mlterm "hs:ts=\E]0;:fs=\007:ds=\E]0;screen\007"
-hardstatus off
-hardstatus string "[$STY] %n$%t %? [%h]%?"
-caption always "%?%F%{-b bc}%:%{-b bb}%?%C|%D|%M %d|%H%?%F%{+u wb}%? %L=%-Lw%45>%{+b by}%n%f*%t%{-}%+Lw%-0<"
-
-# Turn off the fucking visual bell
-vbell off
-altscreen on
 
 ####
 # Generate some tabs
 ####
-screen -t "$STY VIM" 0
-stuff "vim"
-#stuff ":let g:slime_default_config = {\"sessionname\": \"$STY\", \"windowname\": \"3\"}"
-#stuff ":let g:slime_config = {\"sessionname\": \"$STY\", \"windowname\": \"3\"}"
-#stuff ":let g:slime_dont_ask_default = 1"
-screen -t "$STY HTOP" 1
-stuff "htop -u helmuth"
-screen -t "bash1" 3
-screen -t "bash2" 4
-screen -t "bash3" 5
+screen -t "vim" 0 vim
+screen -t "" 1
+screen -t "" 2
+screen -t "" 3
 
 ####
 # LAYOUTS
 ####
-bind g eval 'source /opt/resources/user_screen_layout'
 #Maximized VIM
-layout Maximized
+layout default
 select 0
-layout save Maximized
-layout new default
+layout save default
+#Splitscreen 1|3
+layout new splitscreen
 select 0
 split -v
 resize -v 85
@@ -81,6 +73,6 @@ focus down
 select 2
 resize 25
 focus left
-layout save default
-
-# End of file
+layout save splitscreen
+#Load default
+layout select default
