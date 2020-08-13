@@ -172,13 +172,13 @@ function remove-build-deps {
 
 
 ####
-# Commandline fuzzy finder
+# FZF - Commandline fuzzy finder
 # Install for current user via: 
 #   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 #   ~/.fzf/install
 ####
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
+export FZF_DEFAULT_OPTS='--height=75% --min-height=10 --layout=reverse-list --multi --info=inline --tabstop=2 --history-size=15000'
 
 ####
 # CONDA SETUP (managed by conda init)
