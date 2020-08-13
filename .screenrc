@@ -17,7 +17,7 @@ altscreen on
 defscrollback 15000
 # Ensure the default shell is the same as the $SHELL environment variable
 shell -$SHELL
-shelltitle "$STY bash"
+shelltitle ""
 # Configure status bar at the bottom of the terminal
 termcapinfo xterm*|Eterm|mlterm "hs:ts=\E]0;:fs=\007:ds=\E]0;screen\007"
 hardstatus off
@@ -46,9 +46,9 @@ bind - resize -1
 # Generate some tabs
 ####
 screen -t "vim" 0 vim
-screen -t "" 1
-screen -t "" 2
-screen -t "" 3
+screen 1
+screen 2
+screen 3
 
 ####
 # LAYOUTS
