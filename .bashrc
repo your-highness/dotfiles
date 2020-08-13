@@ -172,6 +172,15 @@ function remove-build-deps {
 
 
 ####
+# Commandline fuzzy finder
+# Install for current user via: 
+#   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+#   ~/.fzf/install
+####
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+
+####
 # CONDA SETUP (managed by conda init)
 ####
 # >>> conda initialize >>>
@@ -193,4 +202,3 @@ export -f __conda_activate
 export -f __conda_reactivate
 export -f __conda_hashr
 export -f __add_sys_prefix_to_path
-
