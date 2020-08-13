@@ -179,6 +179,7 @@ function remove-build-deps {
 ####
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_OPTS="--height=75% --min-height=10 --layout=reverse-list --multi --info=inline --tabstop=2 --history-size=15000 --preview='head -100 {}' --preview-window=right:75% --color='fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 
 ####
