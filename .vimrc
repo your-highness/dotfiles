@@ -33,7 +33,7 @@ hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 nmap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
 "Set color scheme
 set t_Co=256
-colorscheme wombat
+  colorscheme desert
 syntax enable
 "Splitting (vsp -> right, sp -> below)
 set splitright
