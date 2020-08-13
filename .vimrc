@@ -143,6 +143,15 @@ nmap \m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 """
 "Plugins
 """
+" FZF
+set rtp+=~/.fzf
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+let g:fzf_layout = {'left': '30%'}
+command! -nargs=1 -bang Locate call fzf#run(fzf#wrap(
+      \ {'source': 'locate <q-args>', 'options': '-m'}, <bang>0))
 "Pathogen
 execute pathogen#infect()
 "Slime send text through screen
