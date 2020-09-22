@@ -116,12 +116,6 @@ export PAGER='less'
 export LESS='-MiRXS'
 #VIM is default editor
 export EDITOR='vim'
-#Perl
-export PATH="/home/helmuth/perl5/bin${PATH:+:${PATH}}"
-export PERL5LIB="/home/helmuth/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
-export PERL_LOCAL_LIB_ROOT="/home/helmuth/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
-export PERL_MB_OPT="--install_base \"/home/helmuth/perl5\""
-export PERL_MM_OPT="INSTALL_BASE=/home/helmuth/perl5"
 #Java
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 export JAVA_TOOL_OPTIONS+=" -Djava.net.useSystemProxies=true"

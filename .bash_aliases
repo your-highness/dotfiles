@@ -44,4 +44,4 @@ alias apt-upgrade="sudo apt-get update && sudo apt-get update && sudo apt-get up
 #sge: Watch queue
 alias wqstat="watch -n .5 \"qstat -a | sort -k 10 | tail -25\""
 #krona: Creat diskusage HTML
-alias diskusage="DATE=\$(date +\"%F\") && sudo /opt/conda/miniconda3/envs/mol-routine/bin/ktImportDiskUsage -o ~/\${DATE}_DiskUsage-Krona.html / && sudo chown helmuth:helmuth ~/\${DATE}_DiskUsage-Krona.html"
+alias diskusage="DATE=\$(date +\"%F\") && sudo /opt/conda/miniconda3/envs/mol-routine/bin/ktImportDiskUsage -o ~/\${DATE}_DiskUsage-Krona.html / && sudo chown hgdiag:hgdiag ~/\${DATE}_DiskUsage-Krona.html"
