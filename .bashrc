@@ -1,11 +1,3 @@
-case "$0" in
-          -sh|sh|*/sh)	modules_shell=sh ;;
-       -ksh|ksh|*/ksh)	modules_shell=ksh ;;
-       -zsh|zsh|*/zsh)	modules_shell=zsh ;;
-    -bash|bash|*/bash)	modules_shell=bash ;;
-esac
-module() { eval `/usr/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
-#module() { eval `/usr/bin/modulecmd $modules_shell $*`; }
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -24,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=15000
+HISTFILESIZE=15000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -64,10 +56,15 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+
+####
+#PROMPT
+####
+export PROMPT_COMMAND='DIR=`pwd|sed -e "s!$HOME!~!"`; if [ ${#DIR} -gt 50 ]; then CurDir=${DIR:0:20}...${DIR:${#DIR}-20}; else CurDir=$DIR; fi'
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+  PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\$CurDir\[\033[00m\]>"
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\$CurDir>'
 fi
 unset color_prompt force_color_prompt
 
@@ -83,21 +80,10 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
 fi
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-#alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -119,50 +105,55 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#migrated from old archlinux home
-PAGER='less'
-LESS='-MiRXS'
-PATH=$PATH:/home/helmuth/bin
 
-export LESS PAGER PATH
+####
+# EXPORTS
+####
+#Default date format
+export HISTTIMEFORMAT='%F %a %T %t'
+#Pager config
+export PAGER='less'
+export LESS='-MiRXS'
+#VIM is default editor
+export EDITOR='vim'
+#Perl
+export PATH="/home/helmuth/perl5/bin${PATH:+:${PATH}}"
+export PERL5LIB="/home/helmuth/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+export PERL_LOCAL_LIB_ROOT="/home/helmuth/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+export PERL_MB_OPT="--install_base \"/home/helmuth/perl5\""
+export PERL_MM_OPT="INSTALL_BASE=/home/helmuth/perl5"
+#Java
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+export JAVA_TOOL_OPTIONS+=" -Djava.net.useSystemProxies=true"
+#Python
+export PYTHONSTARTUP=~/.pythonrc
 
-umask 002
 
-
-# history
+####
+# HISTORY
+####
 HISTCONTROL=erasedups:ignorespace
-HISTFILESIZE=1000
+#Use up and down keys to search history :)
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
 
-# ls
+
+####
+# COLORS
+####
 LS_COLORS="ow=01;34:di=01;34:ln=01;36:ex=01;32"
 
-# shorten prompt
-export PROMPT_COMMAND='DIR=`pwd|sed -e "s!$HOME!~!"`; if [ ${#DIR} -gt 50 ]; then CurDir=${DIR:0:20}...${DIR:${#DIR}-20}; else CurDir=$DIR; fi'
-PS1="\h:\$CurDir>"
 
-# ssh
+####
+# FUNCTIONS
+####
+#Auto completion for known hosts
 SSH_COMPLETE=$(cut -f1 -d' ' ~/.ssh/known_hosts |\
                  tr ',' '\n' |\
                  sort -u |\
                  grep -e '[[:alpha:]]')
 complete -o default -W "${SSH_COMPLETE[*]}" ssh
-
-SVN_EDITOR='vim'
-EDITOR='vim'
-PYTHONSTARTUP=~/.pythonrc
-
-#map ESC to CAPS LOCK
-#setxkbmap -option caps:escape
-
-#VIM is default editor
-#export VISUAL=VIM
-export EDITOR='vim'
-
-####
-# Functions
-####
+#Move up $depth dirs
 function .. 
 {
   depth=$1;
@@ -173,7 +164,6 @@ function ..
     cd ..
   done
 }
-
 #Remove dependencies build by apt-get build-deps $1
 function remove-build-deps {
   sudo aptitude markauto $(apt-cache showsrc $1 | sed -e '/Build-Depends/!d;s/Build-Depends: \|,\|([^)]*),*\|\[[^]]*\]//g')
@@ -181,18 +171,21 @@ function remove-build-deps {
 }
 
 
+####
+# FZF - Commandline fuzzy finder
+# Install for current user via: 
+#   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+#   ~/.fzf/install
+####
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_OPTS="--height=75% --min-height=10 --layout=reverse-list --multi --info=inline --tabstop=2 --history-size=15000 --preview='head -100 {}' --preview-window=right:50% --color='fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window right:50%:wrap"
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
-PATH="/home/helmuth/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/helmuth/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/helmuth/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/helmuth/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/helmuth/perl5"; export PERL_MM_OPT;
 
-# added by Miniconda2 4.3.21 installer
-# export PATH="/opt/conda/miniconda3/bin:$PATH"  # commented out by conda initialize  # commented out by conda initialize
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
-
-
+####
+# CONDA SETUP (managed by conda init)
+####
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/conda/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -212,6 +205,3 @@ export -f __conda_activate
 export -f __conda_reactivate
 export -f __conda_hashr
 export -f __add_sys_prefix_to_path
-
-export HISTTIMEFORMAT='%F %a %T %t'
-export JAVA_TOOL_OPTIONS+=" -Djava.net.useSystemProxies=true"
