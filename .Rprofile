@@ -4,11 +4,10 @@ options(editor="vim")
 # options(pager="internal")
 options(tab.width = 2)
 # output screen width (less and pipe friendly, i.e. no wraps)
-options(width = 500)
 options(graphics.record=TRUE)
 
 #Repository
-options(repos=structure(c(CRAN="http://mirrors.softliste.de/cran/")))
+#options(repos=structure(c(CRAN="http://mirrors.softliste.de/cran/")))
 
 #Parallel compilation for Rcpp
 Sys.setenv("PKG_CXXFLAGS"="-fopenmp -std=c++11")
@@ -22,23 +21,13 @@ if(interactive()){
     options(continue=" ")
 
     # neat colored output for xterm
+    library(colorout)
     options(colorout.verbose = 1)
     options(colorout.anyterm = TRUE)
     options(colorout.dumb = TRUE)
     options(colorout.noninteractive = TRUE)
     options(colorout.notatty = TRUE)    
-    library(colorout)
     setOutputColors256(verbose=F)    
-
-
-    #Automatically set the value of options("width") when the terminal
-    #DO NOT use with graphical R interfaces (Rstudo etc.)
-    options(setwidth.verbose = 1)
-    library(setwidth)
-
-    # provides a TCP/IP server to allow the communication between R and Vim-R-plugin
-    options(vimcom.verbose = 1)
-    library(vimcom)
 }
 
 
