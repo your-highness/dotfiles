@@ -4,8 +4,8 @@
 
 alias lp='/bin/ls' # for piping
 alias ls='ls --color' #-F'
-alias ll='ls -alF'
-alias la='ls -ah'
+alias ll='ls -lFh'
+alias la='ls -alh'
 alias lq='ls -ltrh'
 alias lS='ls -lSrh'
 alias l='ls -CF'
@@ -19,8 +19,19 @@ alias vgrep='grep -v'
 
 alias xterm="xterm -e screen"
 
+alias ssh="ssh -Y"
 alias ssh-joenix="ssh -Y joenix.local"
 alias ssh-mpi="ssh -Y helmuth@geniux.molgen.mpg.de"
+alias ssh01="ssh -Y helmuth@s-labb-ngs01.laborberlin.intern"
+alias ssh-bioinf01="ssh -Y bioinf@s-labb-ngs01.laborberlin.intern"
+alias ssh-hgdiag01="ssh -Y hgdiag@s-labb-ngs01.laborberlin.intern"
+alias ssh-moldiag01="ssh -Y moldiag@s-labb-ngs01.laborberlin.intern"
+alias ssh-virdiag01="ssh -Y virdiag@s-labb-ngs01.laborberlin.intern"
+alias ssh02="ssh -Y helmuth@s-labb-ngs02.laborberlin.intern"
+alias ssh-bioinf02="ssh -Y bioinf@s-labb-ngs02.laborberlin.intern"
+alias ssh-hgdiag02="ssh -Y hgdiag@s-labb-ngs02.laborberlin.intern"
+alias ssh-moldiag02="ssh -Y moldiag@s-labb-ngs02.laborberlin.intern"
+alias ssh-virdiag02="ssh -Y virdiag@s-labb-ngs02.laborberlin.intern"
 
 alias eclipse="eclipse -vmargs -Xmx512M"
 alias calc="gnome-calculator"
