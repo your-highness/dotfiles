@@ -27,7 +27,7 @@ set numberwidth=4
 set list
 "Word wrapping and line width
 set nowrap
-set tw=80
+set tw=120
 set cc=+1
 hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 nmap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
